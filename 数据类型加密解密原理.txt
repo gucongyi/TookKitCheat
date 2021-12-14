@@ -1,0 +1,24 @@
+数据类型加密
+get->隐试转换ObscuredInt->int 解密
+public static implicit operator ObscuredInt(int value)
+		{
+			return new ObscuredInt(value);
+		}
+set->隐试类型转换int->ObscuredInt 加密
+public static implicit operator int(ObscuredInt value)
+		{
+			return value.InternalDecrypt();
+		}
+		
+加密解密都是用异或操作
+A^B=C C^B=A
+
+
+
+
+如果ObscuredInt不能序列化成json，对应的数据中的修饰符要改成public 
+[SerializeField]
+public int hiddenValue;
+
+使用：
+原来的数据类型直接替换成ObscuredXXX结构体类型即可
